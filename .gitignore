@@ -1,37 +1,114 @@
-# Local .terraform directories
+# Byte-compiled / optimized / DLL files
+__pycache__/  
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/      
+lib64/    
+          
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+# Usually these files are written by a python script from a template,
+# before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec       
+             
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.* 
+.cache/      
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.project
+*.pydevproject
+# .DS_Store - już jest niżej w sekcji macOS
+
+# Terraform
 .terraform/
-
-# .tfstate files
-*.tfstate
-*.tfstate.*
-
-# Crash log files
+terraform.tfstate
+terraform.tfstate.backup 
+*.tfstate                 
+*.tfstate.*               
+                           
 crash.log
-crash.*.log
+*.tfvars                  
+                           
+                           
+# *.tfplan                
+                          
 
-# Exclude all .tfvars files, which are likely to contain sensitive data, such as
-# password, private keys, and other secrets. These should not be part of version 
-# control as they are data points which are potentially sensitive and subject 
-# to change depending on the environment.
-*.tfvars
-*.tfvars.json
+# Pliki ZIP z kodem Lambda (są generowane dynamicznie i nie powinny być wersjonowane)
+# Jeśli generujesz ZIP w katalogu terraform (lub głównym projektu):
+lambda_package.zip        
+spp-sensor-processor.zip  
 
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
+# Jeśli generujesz ZIP w podkatalogu np. 'src' (dla kodu Lambda):
+# src/lambda_function.zip
 
-# Ignore transient lock info files created by terraform apply
-.terraform.tfstate.lock.info
+# Ogólna reguła dla plików zip, jeśli są artefaktami budowania:
+# *.zip                   
+                          
 
-# Include override files you do wish to add to version control using negated pattern
-# !example_override.tf
+# Pliki specyficzne dla macOS
+.DS_Store                 
+Desktop.ini               
+Icon?                     
 
-# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
-# example: *tfplan*
+# Pliki specyficzne dla Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini              
 
-# Ignore CLI configuration files
-.terraformrc
-terraform.rc
+# Logi
+*.log
+
+# Inne pliki tymczasowe lub specyficzne dla systemu
+*.bak
+*.tmp
+*~ 
