@@ -1,0 +1,58 @@
+image:
+  name: hashicorp/terraform:latest
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+variables:
+  TF_ROOT: "${CI_PROJECT_DIR}/terraform"
+  TF_ADDRESS: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/default"
+
+before_script:
+  - cd "${TF_ROOT}"
+
+stages:
+  - validate
+  - plan
+  - apply
+  - destroy
+
+validate:
+  stage: validate
+  script:
+    - terraform init -backend=true
+    - terraform validate
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+plan:
+  stage: plan
+  script:
+    - terraform init -backend=true
+    - terraform plan -out=plan.tfplan
+  artifacts:
+    name: plan
+    paths:
+      - "${TF_ROOT}/plan.tfplan"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+apply:
+  stage: apply
+  script:
+    - terraform init -backend=true
+    - terraform apply -auto-approve plan.tfplan
+  dependencies:
+    - plan
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+destroy:
+  stage: destroy
+  script:
+    - terraform init -backend=true
+    - terraform destroy -auto-approve
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: manual
+  allow_failure: true
