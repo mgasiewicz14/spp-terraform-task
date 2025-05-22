@@ -1,23 +1,23 @@
 variable "aws_region" {
-  description = "Region AWS dla zasobów"
+  description = "AWS region"
   type        = string
   default     = "us-east-1"
 }
 
 variable "lambda_function_name" {
-  description = "Nazwa funkcji Lambda"
+  description = "Lambda function name"
   type        = string
-  default     = "spp-sensor-processor"
+  default     = "terraform-spp"
 }
 
 variable "sns_topic_name" {
-  description = "Nazwa tematu SNS do powiadomień"
+  description = "SNS subject name"
   type        = string
-  default     = "spp-sensor-notifications"
+  default     = "terraform-spp-sns"
 }
 
 variable "student_email" {
-  description = "Twój email do subskrypcji SNS (do testów)"
+  description = "Subscription email"
   type        = string
   default = "263668@student.pwr.edu.pl" 
   
